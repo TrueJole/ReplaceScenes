@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://be3e5mgpc7ykx"]
+
+[node name="Filedialog" type="FileDialog"]
+disable_3d = true
+title = "Select a file as a replacement"
+initial_position = 1
+size = Vector2i(1000, 1000)
+ok_button_text = "Replace with"
+dialog_hide_on_ok = true
+mode_overrides_title = false
+file_mode = 0
