@@ -13,7 +13,7 @@ func _exit_tree() -> void:
 	remove_tool_menu_item("Replace all selected")
 
 func replace() -> void:
-	var fileDialog: FileDialog = preload("res://addons/replace_tool/filedialog.tscn").instantiate()
+	var fileDialog: FileDialog = preload("res://addons/replace_scenes/filedialog.tscn").instantiate()
 	get_editor_interface().popup_dialog(fileDialog)
 	
 	await fileDialog.file_selected
