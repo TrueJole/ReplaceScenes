@@ -24,13 +24,15 @@ func replace() -> void:
 		return
 		
 	for scene: Node in selected:
-		var temp: Node3D = replacement.instantiate()
-		scene.add_sibling(temp, true)
-		temp.transform = scene.transform
-		temp.owner = scene.owner
-		
-		scene.queue_free()
-		
-		##optionally copy all the metadata
-		#for meta: StringName in scene.get_meta_list():
-		#	temp.set_meta(meta, scene.get_meta(meta))
+		## Don't free root node of the scene, will lead to corruption
+		if not scene == get_editor_interface().get_edited_scene_root():
+			var temp: Node3D = replacement.instantiate()
+			scene.add_sibling(temp, true)
+			temp.transform = scene.transform
+			temp.owner = scene.owner
+			
+			scene.queue_free()
+			
+			## optionally copy all the metadata
+			#for meta: StringName in scene.get_meta_list():
+			#	temp.set_meta(meta, scene.get_meta(meta))
