@@ -18,14 +18,16 @@ func replace() -> void:
 	
 	await fileDialog.file_selected
 	var replacement: PackedScene = load(fileDialog.current_path)
-
-	var selected: Array[Node] = editorSelection.get_selected_nodes() 
-	if selected.is_empty():
+	
+	if replacement.instantiate() is not Node3D:
+		print_debug('Replacement is not a Node3D')
 		return
+	
+	var selected: Array[Node] = editorSelection.get_selected_nodes() 
 		
 	for scene: Node in selected:
 		## Don't free root node of the scene, will lead to corruption
-		if not scene == get_editor_interface().get_edited_scene_root():
+		if not scene == get_editor_interface().get_edited_scene_root() and scene is Node3D:
 			var temp: Node3D = replacement.instantiate()
 			scene.add_sibling(temp, true)
 			temp.transform = scene.transform
